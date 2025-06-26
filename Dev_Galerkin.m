@@ -1,4 +1,4 @@
-function [] = Dev_Galerkin(n, L, M0, P0)
+function [] = Dev_Galerkin(n, L, M0, P0, Integration)
 % Plot deflection,angles and forces diagram for Timoshenko beam
 % for different h/l values and in comparison to Euler-Bernoulli deflections.
 
@@ -12,7 +12,7 @@ y_EB = cell(1, n + 1);
 
 for i = 1:length(h_c)
     % Calculate Galerkin approximation by iterative number of elements.
-    [x{i},y{i},yd{i},EI] = Galerkin(h_c(i),L,M0,P0,n,"Full");
+    [x{i},y{i},yd{i},EI] = Galerkin(h_c(i),L,M0,P0,n, Integration);
     [M{i},S{i}] = Generate_forces(x{i},yd{i},EI);
     y_EB{i} = EB_deflection(x{i}, P0, M0, EI, L);
 end
